@@ -10,6 +10,7 @@
             "Presentation\\": "src/presentation/",
             "Entities\\": "src/data/entities/",
             "EntitiesService\\": "src/data/service/",
+            "DataLayer\\": "src/data/",
             "Config\\": "src/config/",
             "Tests\\": "test/"
         }

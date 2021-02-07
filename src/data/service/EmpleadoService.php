@@ -2,7 +2,8 @@
 
 namespace EntitiesService;
 
-use Data\EntityManagerSingleton;
+use Entities\Empleado;
+use DataLayer\EntityManagerSingleton as ems;
 
 // EmpleadoService
 
@@ -35,9 +36,25 @@ class EmpleadoService implements EmpleadoServiceInterface
         return self::$instances[$subclass];
     }
     
-    public function saveEmpleado(Empleado $empleado) {
-        EntityManagerSingleton::getInstance();
-        
- 
+    /**
+     * Persist an Empleado entity into database
+     * @param Empleado $empleado
+     */
+    public function save(Empleado $empleado): Empleado
+    {
+        $ems = ems::getInstance()->getEM();
+        $ems->persist($empleado);
+        $ems->flush();
+        return $empleado;
+    }
+    
+    /**
+     * Return all Empleado
+     */
+    public function findAll()
+    {
+        $ems = ems::getInstance()->getEM();
+        $repo = $ems->getRepository('\Entities\Empleado');
+        return $repo->findAll();
     }
 }

@@ -30,7 +30,11 @@ $connectionParams = array(
             'user' => DatabaseConfig::$db_user,
             'password' => DatabaseConfig::$db_password,
                     'driver' => DatabaseConfig::$driver,
-        'host' => 'localhost'
+        'host' => 'localhost',
+                'charset'  => 'utf8',
+            'driverOptions' => array(
+                1002 => 'SET NAMES utf8'
+            )
 
 );
 $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);

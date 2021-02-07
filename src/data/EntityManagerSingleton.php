@@ -1,8 +1,6 @@
 <?php
 
-
-namespace EntitiesService;
-
+namespace DataLayer;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
@@ -36,7 +34,6 @@ class EntityManagerSingleton
         $subclass = static::class;
         if(!isset(self::$instance[$subclass])) {
             self::$instances[$subclass] = new static();
-            
         }
         return self::$instances[$subclass];
     }
@@ -50,14 +47,18 @@ class EntityManagerSingleton
     private function setEntityManager() {
         
         $this->conn = array(
-            'driver' => \DatabaseConfig::$driver,
-            'user' => \DatabaseConfig::$db_user,
-            'password' => \DatabaseConfig::$db_password,
-            'dbname' => \DatabaseConfig::$db_name
+            'driver' => DatabaseConfig::$driver,
+            'user' => DatabaseConfig::$db_user,
+            'password' => DatabaseConfig::$db_password,
+            'dbname' => DatabaseConfig::$db_name,
+            'charset'  => 'utf8',
+            'driverOptions' => array(
+                1002 => 'SET NAMES utf8'
+            )
         );
         
         $this->config = Setup::createAnnotationMetadataConfiguration(
-            array("../../entities"),
+            array(__DIR__."/entities"),
             self::$isDevMode,
             self::$proxyDir,
             self::$cache,

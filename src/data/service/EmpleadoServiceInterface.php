@@ -2,12 +2,12 @@
 
 namespace EntitiesService;
 
-use EntitiesService\Empleado;
+use Entities\Empleado;
 
 // ISystem Interface
 
 interface EmpleadoServiceInterface
 {
-    public function saveEmpleado(Empleado $empleado);
+    public function save(Empleado $empleado): Empleado;
     
 }

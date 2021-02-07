@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\DatabaseFixture;
+namespace Tests;
 
 use Config\DatabaseConfig;
 
@@ -37,7 +37,7 @@ class DatabaseFixture
      */
     private function loadFixtureFile()
     {
-        $this->sqlFile = file_get_contents('Fixtures/'.$this->sqlFileName);
+        $this->sqlFile = file_get_contents(__DIR__.'/Fixtures/'.$this->sqlFileName.'.sql');
     }
     
     /**

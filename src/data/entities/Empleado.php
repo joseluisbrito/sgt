@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
 * @ORM\Entity
-* @ORM\Table(name="empleados")
+* @ORM\Table(name="empleados",options={"collate"="utf8_spanish_ci"})
 */
 
 class Empleado
