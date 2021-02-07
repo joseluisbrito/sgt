@@ -4,10 +4,10 @@ require_once "../../vendor/autoload.php";
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-
+use Config\DatabaseConfig;
 
 // Simple and "default" Doctrine ORM configuration for annotations
-$isDevMode = true;
+$isDevMode = false;
 $proxyDir = null;
 $cache = null;
 $useSimpleAnnotationReader = false;
@@ -25,10 +25,15 @@ $config = Setup::createAnnotationMetaDataConfiguration(
 // $config = Setup::createYAMLMetadataConfiguration(array(__DIR__."/config/yaml"), $isDevMode);
 
 // database configuration parameters
-$conn = array(
-  'driver' => 'pdo_sqlite',
-  'path' => __DIR__ . '/db.sqlite',
+$connectionParams = array(
+                'dbname' => DatabaseConfig::$db_name,
+            'user' => DatabaseConfig::$db_user,
+            'password' => DatabaseConfig::$db_password,
+                    'driver' => DatabaseConfig::$driver,
+        'host' => 'localhost'
+
 );
+$conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
 
 // obtaining the entity EntityManager
 $entityManager = EntityManager::create($conn, $config);

@@ -1,12 +1,12 @@
 <?php
 
-require_once '../../../vendor/autoload.php';
 
 namespace EntitiesService;
 
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Config\DatabaseConfig;
 
 class EntityManagerSingleton
 {
@@ -50,13 +50,14 @@ class EntityManagerSingleton
     private function setEntityManager() {
         
         $this->conn = array(
-            'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . '/db.sqlite',
-            
+            'driver' => \DatabaseConfig::$driver,
+            'user' => \DatabaseConfig::$db_user,
+            'password' => \DatabaseConfig::$db_password,
+            'dbname' => \DatabaseConfig::$db_name
         );
         
         $this->config = Setup::createAnnotationMetadataConfiguration(
-            array(__DIR__."/db.sqlite"),
+            array("../../entities"),
             self::$isDevMode,
             self::$proxyDir,
             self::$cache,

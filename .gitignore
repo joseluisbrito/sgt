@@ -2,3 +2,4 @@ config/
 nbproject/
 vendor/
 composer.lock
+src/config/DatabaseConfig.php

@@ -9,7 +9,9 @@
             "Business\\": "src/business/",
             "Presentation\\": "src/presentation/",
             "Entities\\": "src/data/entities/",
-            "EntitiesService\\": "src/data/service/"
+            "EntitiesService\\": "src/data/service/",
+            "Config\\": "src/config/",
+            "Tests\\": "test/"
         }
     },
         "require-dev": {
