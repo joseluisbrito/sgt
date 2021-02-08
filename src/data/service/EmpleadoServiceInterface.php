@@ -10,4 +10,10 @@ interface EmpleadoServiceInterface
 {
     public function save(Empleado $empleado): Empleado;
     
+    public function findAll();
+    
+    public function update(Empleado $empleado);
+    
+    public function findById(int $id): Empleado;
+    
 }

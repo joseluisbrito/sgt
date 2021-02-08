@@ -57,4 +57,24 @@ class EmpleadoService implements EmpleadoServiceInterface
         $repo = $ems->getRepository('\Entities\Empleado');
         return $repo->findAll();
     }
+    
+    /**
+     * Update an Empleado
+     */
+    public function update(Empleado $empleado)
+    {
+        $ems = ems::getInstance()->getEM();
+        $ems->merge($empleado);
+        $ems->flush();
+        
+    }
+    
+    /**
+     * Find Empleado by Id
+     */
+    public function findById(int $id): Empleado {
+        $ems = ems::getInstance()->getEM();
+        $empleado = $ems->find('\Entities\Empleado', $id);
+        return $empleado;
+    }
 }

@@ -52,4 +52,16 @@ final class EmpleadoServiceTest extends TestCase
         $this->assertCount(3, $empleadoService->findAll());
         $fixture->load('table_empleado_empty_fixture');
     }
+    
+    public function testUpdateEmpleado()
+    {
+        $fixture = new DatabaseFixture();
+        $fixture->load('table_empleado_3rows_fixture');
+        $empleadoService = EmpleadoService::getInstance();
+        $empleado = $empleadoService->findById(1);
+        $empleado->setNombre("José Brito");
+        $empleadoService->update($empleado);
+        $this->assertSame("José Brito", $empleado->getNombre());
+        $fixture->load('table_empleado_empty_fixture');
+    }
 }
