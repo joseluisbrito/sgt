@@ -26,7 +26,7 @@ class EmpleadoService implements EmpleadoServiceInterface
     }
     
     /**
-     * The method to get a Singleton instance of CtrlSystem
+     * The method to get a Singleton instance of EmpleadoService
      */
     public static function getInstance() {
         $subclass = static::class;

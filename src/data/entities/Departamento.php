@@ -1,29 +1,56 @@
 <?php
 
 namespace Entities;
-use Entities\Empleado;
 
+// src/persistence/entities/Departamento.php
+
+use Entities\Empleado;
+use Entities\Motivo;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="departamentos")
+ */
 class Departamento
 {
     /**
      * 
      * @var Empleado
      */
-    protected $empleados = [];
+    /**
+     * 
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
+    protected $id;
+    
     
     /**
      * 
-     * @var Motivo
+     * @ORM\OneToMany(targetEntity="Motivo", mappedBy="departamentoAtiende")
+     * @var Motivo[] An ArrayColletion of Motivo objects.
      */
-    protected $motivos = [];
+    protected $atiende = [];
     
+    /**
+     * @ORM\OneToMany(targetEntity="Empleado", mappedBy="departamentoEmplea")
+     * @var Empleado[] An ArrayCollection of Empleado objects.
+     */
+    protected $emplea = [];
+    
+
+    /**
+     * @ORM\Column(type="string")
+     * @var String departamento
+     */
+    protected $departamento;
+
     /**
      * Add Empleado to the Departamento
      * @param Empleado $empleado
-     */
-    
-    protected $departamento;
-    
+     */    
     public function addEmpleado(Empleado $empleado)
     {
         array_push($this->empleados, $empleado);
@@ -74,6 +101,10 @@ class Departamento
         $this->departamento = $departamento;
     }
     
+    /**
+     * Return current departamento name
+     * @return String
+     */
     public function getDepartamento()
     {
         return $this->departamento;
