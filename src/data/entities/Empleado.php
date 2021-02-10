@@ -1,5 +1,7 @@
 <?php
+
 namespace Entities;
+
 // src/persistence/entities/Empleado.php
 
 use Doctrine\ORM\Mapping as ORM;
@@ -19,6 +21,11 @@ class Empleado
   * @ORM\GeneratedValue
   */
   protected $id;
+  
+  /**
+   * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="emplea")
+   */
+  protected $departamentoEmplea;
 
   /**
   * @ORM\Column(type="string")
