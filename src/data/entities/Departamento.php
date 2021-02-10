@@ -48,12 +48,12 @@ class Departamento
     protected $departamento;
 
     /**
-     * Add Empleado to the Departamento
+     * Add Empleado to the ArrayCollection emplea of Empleado objects.
      * @param Empleado $empleado
      */    
     public function addEmpleado(Empleado $empleado)
     {
-        array_push($this->empleados, $empleado);
+        array_push($this->emplea, $empleado);
     }
     
     /**
@@ -63,7 +63,7 @@ class Departamento
      */
     public function getEmpleadoById(int $id)
     {
-        foreach ($this->empleados as $e)
+        foreach ($this->emplea as $e)
         {
             if($e->getId() === $id)
                 return $e;
@@ -76,7 +76,7 @@ class Departamento
      */
     public function addMotivo(Motivo $motivo)
     {
-        array_push($this->motivos, $motivo);
+        array_push($this->atiende, $motivo);
     }
     
     /**
@@ -84,7 +84,7 @@ class Departamento
      */
     public function getMotivoById(int $id)
     {
-        foreach($this->motivos as $m)
+        foreach($this->atiende as $m)
         {
             if($m->getId() === $id)
                 return $m;
@@ -109,5 +109,11 @@ class Departamento
     {
         return $this->departamento;
     }
+    
+    public function getId() {
+        return $this->id;
+    }
+
+
     
 }

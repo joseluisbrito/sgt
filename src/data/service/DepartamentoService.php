@@ -54,4 +54,32 @@ class DepartamentoService
         $repo = $ems->getRepository('\Entities\Empleado');
         return $repo->findAll();
     }
+    
+    public function addMotivo(Motivo $motivo)
+    {
+        //TODO: implement this
+    }
+    
+    public function findById(int $id): Departamento
+    {
+        $ems = ems::getInstance()->getEM();
+        $departamento = $ems->find('\Entities\Departamento', $id);
+        return $departamento;
+    }
+    
+    public function getAllMotivo()
+    {
+        // TODO: implement this
+    }
+    
+    public function findAll()
+    {
+        // TODO: implement this
+    }
+    
+    public function update(Departamento $departamento): Departamento
+    {
+        // TODO: implement this
+    }
+    
 }

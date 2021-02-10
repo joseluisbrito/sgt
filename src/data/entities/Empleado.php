@@ -5,6 +5,7 @@ namespace Entities;
 // src/persistence/entities/Empleado.php
 
 use Doctrine\ORM\Mapping as ORM;
+use Entities\Departamento;
 
 /**
 * @ORM\Entity
@@ -23,7 +24,7 @@ class Empleado
   protected $id;
   
   /**
-   * @ORM\ManyToOne(targetEntity="Departamento", inversedBy="emplea")
+   * @ORM\ManyToOne(targetEntity="\Entities\Departamento", inversedBy="emplea", cascade={"persist"})
    */
   protected $departamentoEmplea;
 
@@ -85,6 +86,11 @@ class Empleado
   function setPassword($password): void {
       $this->password = $password;
   }
+
+  function setDepartamentoEmplea(Departamento $departamento)
+  {
+      $this->departamentoEmplea = $departamento;
+  }
   
   function getActivo() {
       return $this->activo;
@@ -110,6 +116,9 @@ class Empleado
       $this->lastLogout = $lastLogout;
   }
 
-
+  public function getDepartamentoEmplea(): Departamento
+  {
+      return $this->departamentoEmplea;
+  }
 
 }

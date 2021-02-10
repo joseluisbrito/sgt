@@ -4,8 +4,11 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 use EntitiesService\EmpleadoService;
 use EntitiesService\EmpleadoServiceInterface;
+use EntitiesService\DepartamentoService;
+use EntitiesService\DepartamentoServiceInterface;
 use \Tests\DatabaseFixture;
 use Entities\Empleado;
+use Entities\Departamento;
 
 
 final class EmpleadoServiceTest extends TestCase
@@ -23,10 +26,9 @@ final class EmpleadoServiceTest extends TestCase
     
     public function testSaveEmpleado(): void
     {
-        $fixture = new DatabaseFixture();
-        $fixture->load('table_empleado_empty_fixture');
+        $this->loadFixture('fixture_empty_empleados_1rowDepartamento');
         
-        $empleadoService = EmpleadoService::getInstance();
+        $departamentoService = DepartamentoService::getInstance();
         
         $empleado = new Empleado();
         $empleado->setActivo(true);
@@ -37,31 +39,45 @@ final class EmpleadoServiceTest extends TestCase
         $empleado->setLastLogin($date);
         $empleado->setLastLogout($date);
         
+        $departamento = $departamentoService->findById(1);     
+        
+        $empleado->setDepartamentoEmplea($departamento);
+        
+        $empleadoService = EmpleadoService::getInstance();
         $empleadoService->save($empleado);
+
         $this->assertIsNumeric($empleado->getId());
         
-        $fixture->load('table_empleado_empty_fixture');
+        $this->loadFixture('fixture_empty_empleados_1rowDepartamento');
   
     }
     
     public function testGetAllEmpleado(): void
     {
-        $fixture = new DatabaseFixture();
-        $fixture->load('table_empleado_3rows_fixture');
+        $this->loadFixture('fixture_3rows_empleado');
+        
         $empleadoService = EmpleadoService::getInstance();        
         $this->assertCount(3, $empleadoService->findAll());
-        $fixture->load('table_empleado_empty_fixture');
+        
+        $this->loadFixture('fixture_empty_empleados_1rowDepartamento');
     }
     
     public function testUpdateEmpleado()
     {
-        $fixture = new DatabaseFixture();
-        $fixture->load('table_empleado_3rows_fixture');
+        $this->loadFixture('fixture_3rows_empleado');
+        
         $empleadoService = EmpleadoService::getInstance();
         $empleado = $empleadoService->findById(1);
         $empleado->setNombre("José Brito");
         $empleadoService->update($empleado);
         $this->assertSame("José Brito", $empleado->getNombre());
-        $fixture->load('table_empleado_empty_fixture');
+        
+        $this->loadFixture('fixture_empty_empleados_1rowDepartamento');
+    }
+    
+    private function loadFixture($fixtureFileName)
+    {
+        $fixture = new DatabaseFixture();
+        $fixture->load($fixtureFileName);
     }
 }
